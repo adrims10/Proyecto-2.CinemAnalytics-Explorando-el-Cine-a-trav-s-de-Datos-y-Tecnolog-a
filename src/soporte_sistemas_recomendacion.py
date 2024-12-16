@@ -97,15 +97,15 @@ def filter_data(df):
         y los usuarios con al menos 1500 valoraciones.
     """
     ## Ratings Per Movie
-    ratings_per_movie = df.groupby('movieId')['rating'].count()
+    ratings_per_movie = df.groupby('Titulo')['cali_imdb'].count()
     ## Ratings By Each User
-    ratings_per_user = df.groupby('userId')['rating'].count()
+    ratings_per_user = df.groupby('generos')['Tipo'].count()
 
     ratings_per_movie_df = pd.DataFrame(ratings_per_movie)
     ratings_per_user_df = pd.DataFrame(ratings_per_user)
 
-    filtered_ratings_per_movie_df = ratings_per_movie_df[ratings_per_movie_df.rating >= 300].index.tolist()
-    filtered_ratings_per_user_df = ratings_per_user_df[ratings_per_user_df.rating >= 1500].index.tolist()
+    filtered_ratings_per_movie_df = ratings_per_movie_df[ratings_per_movie_df.rating >=1 ].index.tolist()
+    filtered_ratings_per_user_df = ratings_per_user_df[ratings_per_user_df.rating >= 1].index.tolist()
     
     df = df[df.movieId.isin(filtered_ratings_per_movie_df)]
     df = df[df.userId.isin(filtered_ratings_per_user_df)]
